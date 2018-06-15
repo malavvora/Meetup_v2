@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+<html>
+<head>
+<title>Meetup</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+    .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.container {
+    position: relative;
+    max-width: 800px; /* Maximum width */
+    margin: 0 auto; /* Center it */
+}
+
+.container .content {
+    position: absolute; /* Position the background text */
+    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 100%; /* Full width */
+    padding: 20px; /* Some padding */
+}
+.container .content {
+    position: absolute; /* Position the background text */
+    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 100%; /* Full width */
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+</style>
+    <link href="{% static 'layout/styles/layout.css'%}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+<div id="top">
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <div class="fl_left">
+      <ul class="nospace">
+          {% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">logout</a></p>
+          {% else %}
+        <li><a href=""><i class="fas fa-home fa-lg"></i></a></li>
+        <li><a href="login/">Login</a></li>
+        <li><a href="register/">Register</a></li>
+          {% endif %}
+      </ul>
+    </div>
+   </div>
+</div>
+
+<div class="wrapper row1">
+  <header id="header" class="hoc clear">
+    <div id="logo" class="one_quarter first">
+      <h1><a href="">Meetup</a></h1>
+     </div>
+  </header>
+</div>
+
+{% block content %}
+<div class="container">
+  <div class="image" style="background-image: url({% static 'images/demo/backgrounds/Meetup1.jpg' %}); height: 70%; width:100%;" >
+        <div class="content">
+            <div class="center">
+        <h3 >What do you love?</h3>
+        <h3 >Do more of it at Meetup</h3>
+        <footer><a class="btn" href="create_meetup/">Create a Meetup</a></footer>
+        </div>
+        </div>
+      </div>
+  </div>
+    </div>
+{% endblock %}
+
+<div class="wrapper row3">
+    <main class="row firstinfo">
+        <article>
+            <h1 class="heading">Explore by category</h1>
+                {% if category %}
+                    <ul>
+                        {% for cat in category %}
+                            <div class="row">
+                                <li><a href="{{ cat.id }}" class="btn btn-info" style="background-image:url('{% static 'images/demo/backgrounds/category_{{ forloop.counter }}.jpg' %}');" role="button">{{ cat.category }} </a></li>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No categories are available.</p>
+                {% endif %}
+        </article>
+            <div class="clear"></div>
+    </main>
+</div>
+
+</body>
+</html>

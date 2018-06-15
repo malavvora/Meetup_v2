@@ -1,0 +1,300 @@
+{% load static %}
+
+<head>
+<title>Meetup</title>
+<meta charset="utf-8">
+    		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/jquery.dropotron.min.js' %}"></script>
+		<script src="{% static 'js/skel.min.js' %}"></script>
+		<script src="{% static 'js/skel-layers.min.js' %}"></script>
+		<script src="{% static 'js/init.js' %}"></script>
+	<!--
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE
+	DESIGNED & DEVELOPED by FreeHTML5.co
+
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	<script src="js/respond.min.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="{% static 'css/skel.css' %}" />
+			<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+			<link rel="stylesheet" href="{% static 'css/style-wide.css' %}" />
+		</noscript>
+
+<style>
+    .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.container {
+    position: relative;
+    height: 100%; /* Maximum width */
+    margin: 0 auto; /* Center it */
+}
+
+.container .content {
+    position: absolute; /* Position the background text */
+    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 100%; /* Full width */
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+</style>
+    <link href="{% static 'layout/styles/layout.css'%}" rel="stylesheet" >
+</head>
+    <body>
+        <div id="top">
+            <div class="wrapper row0">
+                <div id="topbar" class="hoc clear">
+                    <div class="fl_right">
+                        <ul class="nospace">
+                            {% if user.is_authenticated %}
+                                Hi {{ user.username }}!
+                                <p><a href="{% url 'logout' %}">logout</a></p>
+                            {% else %}
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                                <li><a href="{% url 'meetup:register' %}">Sign up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper row1">
+            <header id="header" class="hoc clear">
+                <div id="logo" >
+                    <h1 href="">Meetup</h1>
+                </div>
+            </header>
+        </div>
+        {% block content %}
+            <div class="container">
+                <div class="image" style="background-image: url({% static 'images/demo/backgrounds/background.png' %}); height: 70%; width:100%;" >
+                    <div class="center">
+                        <div class="centered">
+                            <h3 >What do you love?</h3>
+                            <h3 >Do more of it at Meetup</h3>
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-info" href="{% url 'meetup:create_meetup' %}">Create a Meetup</a>
+                            {% else %}
+                                <a class="btn" href="{% url 'meetup:register' %}">Sign up</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+{##}
+{#        <div class="wrapper row3">#}
+{#            <main class="row firstinfo">#}
+{#                 <article>#}
+{#                     <h1 class="heading">Explore by category</h1>#}
+{#                         {% if categories %}#}
+{#                             <ul>#}
+{#                                 {% for category_name in categories %}#}
+{#                                     <div class="btn-group">#}
+{#                                         <li><a href="{% url 'meetup:meetup' category_name.id  %}" class="btn btn-info" style="background-image:url('{% static 'images/demo/backgrounds/{{ category_name }}.jpg' %}');" role="button">{{ category_name.category }} </a></li>#}
+{#                                     </div>#}
+{#                                 {% endfor %}#}
+{#                             </ul>#}
+{#                         {% else %}#}
+{#                            <p>No categories are available.</p>#}
+{#                         {% endif %}#}
+{#                </article>#}
+{#                <div class="clear"></div>#}
+{#            </main>#}
+{#        </div>#}
+{##}
+
+        <div id="extra">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="1/">
+                            <div class="work-grid" href="{% url 'meetup:group' 1 %}"><img src='{% static 'images/demo/backgrounds/tech.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Tech</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="2/">
+                            <div class="work-grid" href="{% url 'meetup:group' 2  %}"><img src='{% static 'images/demo/backgrounds/sports.png' %}' width="300px" height="200" alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Sports</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="3/">
+                            <div class="work-grid" href="{% url 'meetup:group' 3  %}"><img src='{% static 'images/demo/backgrounds/learning.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Learning</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="4/">
+                            <div class="work-grid" href="{% url 'meetup:group' 4  %}"><img src='{% static 'images/demo/backgrounds/photography.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Photography</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="5/">
+                            <div class="work-grid" href="{% url 'meetup:group' 5  %}"><img src='{% static 'images/demo/backgrounds/writing.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Writing</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="6/">
+                            <div class="work-grid" href="{% url 'meetup:group' 6  %}"><img src='{% static 'images/demo/backgrounds/music.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Music</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="7/">
+                            <div class="work-grid" href="{% url 'meetup:group' 7  %}"><img src='{% static 'images/demo/backgrounds/foodanddrink.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Food and Drink</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center animate-box">
+                        <a class="work" href="8/">
+                            <div class="work-grid" href="{% url 'meetup:group' 8  %}"><img src='{% static 'images/demo/backgrounds/dance.png' %}' alt="">
+                                <div class="inner">
+                                    <div class="desc">
+                                        <h3>Dance</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        {% else %}
+            <div class="wrapper coloured">
+                <section class="hoc container clear">
+                    <div class="sectiontitle">
+                        <h2>How Meetup works</h2>
+                    </div>
+                    <ul class="nospace group latest">
+                        <li class="one_half first">
+                            <article>
+                                <div class="excerpt">
+                                    <h2>Find a Meetup</h2>
+                                    <p>Discover local Meetups for all the things you love.</p>
+                                    <footer><a class="btn" href="{% url 'meetup:register' %}">Sign up</a></footer>
+                                </div>
+                            </article>
+                        </li>
+                        <li class="one_half">
+                            <article>
+                                <div class="excerpt">
+                                    <h2 class="heading">Create a Meetup</h2>
+                                    <p>Create your own Meetup, and draw from a community of millions.</p>
+                                    <footer><a class="btn" href="{% url 'meetup:create_meetup' %}">Create a Meetup</a></footer>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        {% endif %}
+    </body>
+</html>

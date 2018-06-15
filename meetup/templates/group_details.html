@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h3> Meetups </h3>
+<table>
+{% for meetup in meetup_list %}
+    {% if meetup.meetup_group_id == group.id %}
+        <tr>
+            <td>{{ meetup.meetup_group }} {{ meetup.meetup_date }} {{ meetup.meetup_place }}</td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>
+<h3> Description </h3>
+{{ group.group_description }}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+
+    <h> Welcome to your Account {{ user.username }} ! </h>
+    {% for groups_part_of in groups %}
+        {% if groups.users == user %}
+            <p>{{ groups_part_of }}</p>
+        {% endif %}
+    {% endfor %}
+    <h2> Create a Meetup? </h2>
+    <a class="btn btn-info" href="/create-meetup/">Create a Meetup</a>
+{% endif %}
+</body>
+</html>
